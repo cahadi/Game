@@ -1156,8 +1156,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 929256868}
+  m_Follow: {fileID: 929256868}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 3
@@ -2507,9 +2507,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f4fcecde2208648aa3bc1c05cafe62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayName: {fileID: 0}
-  _displayText: {fileID: 0}
-  _dialogueWindow: {fileID: 0}
+  _displayName: {fileID: 275379785}
+  _displayText: {fileID: 2008277314}
+  _dialogueWindow: {fileID: 150249756}
   _cooldownNewLetter: 0
 --- !u!114 &1376105447
 MonoBehaviour:
@@ -2524,9 +2524,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _choices:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 382263432}
+  - {fileID: 773294861}
+  - {fileID: 1311736033}
 --- !u!4 &1376105448
 Transform:
   m_ObjectHideFlags: 0
