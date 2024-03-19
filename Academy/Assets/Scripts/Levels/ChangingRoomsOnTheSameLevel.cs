@@ -3,16 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class ChangingRoomsOnTheSameLevel : MonoBehaviour
 {
-    [SerializeField] private int LevelToLoad;
-    public Vector3 position;
-    public VectorValue  PlayerStorage;
+    public GameObject door;
 
-    public void OnTriggerEnter2D(Collider2D collider)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collider.CompareTag("Player"))
+        if(collision.gameObject.tag == "Player")
         {
-            PlayerStorage.initialValue = position;
-            SceneManager.LoadScene(LevelToLoad);
+            
+            collision.gameObject.transform.position = 
+                door.gameObject.transform.position;
         }
     }
 }
