@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class NPCTrigger : MonoBehaviour
@@ -13,6 +10,13 @@ public class NPCTrigger : MonoBehaviour
 
     [Header("New Ink JSON")]
     [SerializeField] private TextAsset _newInkJSON;
+
+    [Header("Sister")]
+    [SerializeField] private GameObject[] _sisters;
+
+    [Header("Skip Animation")]
+    [SerializeField] private GameObject[] _skipAnim;
+
     private bool _isPlayerEnter;
 
     private DialogueController _dialogueController;
@@ -25,39 +29,59 @@ public class NPCTrigger : MonoBehaviour
 
         _dialogueController = FindObjectOfType<DialogueController>();
         _dialogueWindow = FindObjectOfType<DialogueWindow>();
+
+        if (_sisters.Length != 0)
+        {
+            _skipAnim[0].SetActive(false);
+        }
     }
 
     private void Update()
     {
-        if(_dialogueWindow.IsPlaying == true || _isPlayerEnter == false)
+        if (_sisters.Length == 0 && _skipAnim.Length == 0)
         {
-            return;
-        }
+            if (_dialogueWindow.IsPlaying || !_isPlayerEnter)
+            {
+                return;
+            }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            _dialogueController.EnterDialogueMode(_inkJSON);
-            
-            _inkJSON = _newInkJSON;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_inkJSON != null)
+                {
+                    _dialogueController.EnterDialogueMode(_inkJSON);
+                    _inkJSON = _newInkJSON;
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        GameObject obj = collider.gameObject;
-
-        if(collider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             _visualCue.SetActive(true);
             _isPlayerEnter = true;
+
+            if (_sisters.Length != 0)
+            {
+                _dialogueController.EnterDialogueMode(_inkJSON);
+                _skipAnim[0].SetActive(true);
+                _sisters[0].SetActive(false);
+                _skipAnim[0].SetActive(false);
+                _inkJSON = _newInkJSON;
+                Destroy(_sisters[0]);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        GameObject obj = collider.gameObject;
-
-        if(collider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             _visualCue.SetActive(false);
             _isPlayerEnter = false;
