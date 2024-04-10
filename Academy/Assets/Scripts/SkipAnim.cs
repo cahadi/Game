@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkipAnim : MonoBehaviour
 {
     [SerializeField] GameObject[] _objInactive;
+    [SerializeField] GameObject[] _objActive;
     [SerializeField] private GameObject _triggerCanvas;
 
     void Start()
@@ -16,7 +17,7 @@ public class SkipAnim : MonoBehaviour
         _triggerCanvas.SetActive(true);
         if(other.CompareTag("Player"))
         {
-            if(_objInactive.Length != 0)
+            if(_objInactive.Length != 0 || _objActive.Length != 0)
             {
                 Invoke("HideElement", 1f);
             }
@@ -30,7 +31,15 @@ public class SkipAnim : MonoBehaviour
 
     private void HideElement()
     {
-        foreach(GameObject _objI in _objInactive)
-            _objI.SetActive(false);
+        if(_objInactive.Length != 0)
+        {
+            foreach(GameObject _objI in _objInactive)
+                _objI.SetActive(false);
+        }
+        if(_objActive.Length != 0)
+        {
+            foreach(GameObject _objA in _objActive)
+                _objA.SetActive(true);
+        }
     }
 }
