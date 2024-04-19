@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
 
     public VectorValue position;
 
+    [SerializeField] GameObject dialogueWindow;
+    [SerializeField] GameObject skipAnim;
+
     private void Start()
     {
         transform.position = position.initialValue;
@@ -23,8 +26,16 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        GetInput();
-        Animate();
+        if(dialogueWindow.activeInHierarchy || skipAnim.activeInHierarchy)
+        {
+            input = Vector2.zero;
+            Animate();
+        }
+        else
+        {
+            GetInput();
+            Animate();
+        }
     }
 
     private void FixedUpdate()

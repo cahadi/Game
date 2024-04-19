@@ -20,6 +20,7 @@ public class SkipAnim : MonoBehaviour
             if(_objInactive.Length != 0 || _objActive.Length != 0)
             {
                 Invoke("HideElement", 1f);
+                Invoke("HideAnim", 2f);
             }
         }
     }
@@ -41,5 +42,10 @@ public class SkipAnim : MonoBehaviour
             foreach(GameObject _objA in _objActive)
                 _objA.SetActive(true);
         }
+    }
+
+    private void HideAnim()
+    {
+        _triggerCanvas.SetActive(false);
     }
 }
