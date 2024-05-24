@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if(dialogueWindow.activeInHierarchy || skipAnim.activeInHierarchy)
+        if(dialogueWindow.activeInHierarchy || skipAnim.activeInHierarchy || moveSpeed <= 0 )
         {
             input = Vector2.zero;
             Animate();
